@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class STTwitterAPI;
 @class UIView;
 @class HomeViewController;
@@ -26,5 +27,7 @@
 + (id)initWithiOSAccountFromView:(UIView *)parentview;
 
 -(BOOL) handleOpenURL:(NSURL *)url;
+
+-(void)newTweet:(NSString *)text successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock;
 
 @end

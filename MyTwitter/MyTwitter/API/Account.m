@@ -214,6 +214,19 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     return md;
 }
 
-
+-(void)newTweet:(NSString *)text successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock {
+    [_api postStatusUpdate:text
+         inReplyToStatusID:nil
+                  latitude:nil
+                 longitude:nil
+                   placeID:nil
+        displayCoordinates:nil
+                  trimUser:nil
+              successBlock:^(NSDictionary *status) {
+                  successblock(status);
+              } errorBlock:^(NSError *error) {
+                  errorBlock(error);
+              }];
+}
 
 @end
