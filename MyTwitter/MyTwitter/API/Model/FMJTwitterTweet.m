@@ -12,6 +12,8 @@
 
 +(FMJTwitterTweet *)initWithJsonString:(NSDictionary *)json {
     FMJTwitterTweet *tweet = [[FMJTwitterTweet alloc] init];
+    
+    tweet.tweetID = [json[@"id"] stringValue];
     tweet.text = json[@"text"];
     tweet.createTime = json[@"created_at"];
     tweet.retweetCount = [json[@"retweet_count"] intValue];

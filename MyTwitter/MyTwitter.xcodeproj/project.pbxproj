@@ -20,6 +20,7 @@
 		B36AD8CE1BB5B43400BEF016 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B36AD8CD1BB5B43400BEF016 /* AccountManager.m */; };
 		B36AD8D11BB5CFB100BEF016 /* FMJTwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B36AD8D01BB5CFB100BEF016 /* FMJTwitterUser.m */; };
 		B36AD8D41BB5F43800BEF016 /* FMJTwitterTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = B36AD8D31BB5F43800BEF016 /* FMJTwitterTweet.m */; };
+		B36AD8D71BB6039600BEF016 /* FMJTimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B36AD8D61BB6039600BEF016 /* FMJTimeLine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		B36AD8D01BB5CFB100BEF016 /* FMJTwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMJTwitterUser.m; sourceTree = "<group>"; };
 		B36AD8D21BB5F43800BEF016 /* FMJTwitterTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMJTwitterTweet.h; sourceTree = "<group>"; };
 		B36AD8D31BB5F43800BEF016 /* FMJTwitterTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMJTwitterTweet.m; sourceTree = "<group>"; };
+		B36AD8D51BB6039600BEF016 /* FMJTimeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMJTimeLine.h; sourceTree = "<group>"; };
+		B36AD8D61BB6039600BEF016 /* FMJTimeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMJTimeLine.m; sourceTree = "<group>"; };
 		C0F33ED88A8054534530E8E9 /* Pods-MyTwitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTwitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTwitter/Pods-MyTwitter.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DD3A20DEF9B030B46F4F4B /* Pods-MyTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTwitter/Pods-MyTwitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,6 +190,8 @@
 				B36AD8D01BB5CFB100BEF016 /* FMJTwitterUser.m */,
 				B36AD8D21BB5F43800BEF016 /* FMJTwitterTweet.h */,
 				B36AD8D31BB5F43800BEF016 /* FMJTwitterTweet.m */,
+				B36AD8D51BB6039600BEF016 /* FMJTimeLine.h */,
+				B36AD8D61BB6039600BEF016 /* FMJTimeLine.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				B36AD8C91BB4C74300BEF016 /* WebViewController.m in Sources */,
 				B36AD8D11BB5CFB100BEF016 /* FMJTwitterUser.m in Sources */,
 				B36AD8B91BB3BCE200BEF016 /* Account.m in Sources */,
+				B36AD8D71BB6039600BEF016 /* FMJTimeLine.m in Sources */,
 				B362CFDE1BB3B69C00AD9BAE /* main.m in Sources */,
 				B36AD8D41BB5F43800BEF016 /* FMJTwitterTweet.m in Sources */,
 				B362D00D1BB3B7A900AD9BAE /* HomeViewController.m in Sources */,

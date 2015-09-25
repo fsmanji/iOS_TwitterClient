@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+#import "FMJTimeLine.h"
+
+@interface HomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FMJTimeLineDelegate>
 
 - (void)setOAuthToken:(NSString *)token oauthVerifier:(NSString *)verifier;
 

@@ -99,28 +99,19 @@
 }
 
 - (void)onRefresh:(id)sender {
-    
+    [_activeAccount.timeline refresh];
 }
 
+#pragma MARK delegate from timeline
+
+-(void)didUpdateTimeline:(BOOL)hasMore {
+    [_tableView reloadData];
+}
 
 #pragma Notification from Account Manager
 - (void)onUserLogin:(id) sender {
-    /*FiltersViewController* filtersPage = [[FiltersViewController alloc] init];
-     filtersPage.delegate = self;
-     [self.navigationController pushViewController:filtersPage animated:YES];*/
-    
-    //reload home with null data
-    
-    [_activeAccount.api getHomeTimelineSinceID:nil
-                           count:20
-                    successBlock:^(NSArray *response) {
-                        
-                        NSLog(@"TimeLine: %@", response);
-                        
-                        
-                    } errorBlock:^(NSError *error) {
-                        NSLog(@"timeline error: %@", error);
-                    }];
+
+    [_activeAccount.timeline refresh];
 
 }
 
@@ -132,7 +123,6 @@
     //reload home with null data
 }
 
-#pragma Notification end
 
 
 - (void)logout:(id) sender {
@@ -156,7 +146,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 100;//[_searchResult count];
+    return _activeAccount.timeline.homeTimeLine.count;
 }
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -11,6 +11,7 @@
 
 @interface FMJTwitterTweet : NSObject
 
+@property NSString *tweetID;
 @property NSString *text;
 @property NSString *createTime;
 @property NSUInteger retweetCount;

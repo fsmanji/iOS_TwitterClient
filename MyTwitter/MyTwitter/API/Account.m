@@ -13,6 +13,7 @@
 #import <Accounts/Accounts.h>
 #import "WebViewController.h"
 #import "HomeViewController.h"
+#import "FMJTimeLine.h"
 
 typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage); // don't bother with NSError for that
 
@@ -48,6 +49,8 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     }
     
     [AccountManager sharedInstance].activeAccount = self;
+    
+    _timeline = [[FMJTimeLine alloc] init];
     
     return self;
 }
