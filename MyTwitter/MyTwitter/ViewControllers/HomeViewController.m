@@ -15,6 +15,8 @@
 
 @property Account *activeAccount;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property UIRefreshControl* refreshControl;
 
 @end
 
@@ -47,6 +49,24 @@
 
 }
 
+- (void)configureTableView {
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    
+    [_tableView setEstimatedRowHeight:96];
+    [_tableView setRowHeight:UITableViewAutomaticDimension];
+    
+    //add a PTR control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(onRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+    //
+    UINib *nib = [UINib nibWithNibName:@"BusinessTableViewCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"BusinessTableViewCell"];
+    
+}
+
 - (void)styleNavigationBar {
     
     self.navigationItem.title = @"Home";
@@ -76,6 +96,10 @@
     
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 
+}
+
+- (void)onRefresh:(id)sender {
+    
 }
 
 
@@ -123,6 +147,53 @@
     //lauch composer
 }
 
+
+
+#pragma Tableview datasource
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 100;//[_searchResult count];
+}
+/*
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *simpleTableIdentifier = @"BusinessTableViewCell";
+    
+    BusinessTableViewCell *cell = (BusinessTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"BusinessTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    [self configureCell:cell atIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)configureCell:(BusinessTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row = indexPath.row;
+    Business * business = _searchResult[row];
+    cell.nameLabel.text = business.name;
+    cell.reviewsLabel.text = business.reviews;
+    cell.addrLabel.text = business.address;
+    cell.categoryLabel.text = [[business.categories valueForKey:@"description"] componentsJoinedByString:@","];
+    [cell.avatarView setImageWithURL:[NSURL URLWithString:business.photoUrl]];
+    [cell.ratingImageView setImageWithURL:[NSURL URLWithString:business.ratingImgUrl]];
+}
+*/
+
+#pragma tableview delegate
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+
+#pragma Mark private methods
 - (void)setOAuthToken:(NSString *)token oauthVerifier:(NSString *)verifier {
     
     // in case the user has just authenticated through WebViewVC

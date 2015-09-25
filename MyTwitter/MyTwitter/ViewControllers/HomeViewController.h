@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 - (void)setOAuthToken:(NSString *)token oauthVerifier:(NSString *)verifier;
 
