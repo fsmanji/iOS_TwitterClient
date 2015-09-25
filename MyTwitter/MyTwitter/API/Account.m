@@ -170,18 +170,10 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     
     [_api verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
         
-        NSLog(@"Verified: @%@ (%@)", username, userID);
-        [_api getHomeTimelineSinceID:nil
-                               count:20
-                        successBlock:^(NSArray *response) {
-                            
-                            NSLog(@"TimeLine: %@", response);
-                            
-
-                        } errorBlock:^(NSError *error) {
-                            NSLog(@"timeline error: %@", error);
-                        }];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kEventUserLogin object:self];
         
+        NSLog(@"Verified: @%@ (%@)", username, userID);
+              
     } errorBlock:^(NSError *error) {
         NSLog(@"Verification failed: %@", error);
     }];

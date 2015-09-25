@@ -16,6 +16,9 @@
 
 #define kCallbackURL @"myapp://twitter_access_tokens/"
 
+#define kEventUserLogout @"event_user_logged_out"
+#define kEventUserLogin @"event_user_logged_in"
+
 @class  Account;
 @class NSURL;
 
@@ -28,5 +31,7 @@
 -(Account *)activeAccount;
 
 -(void)restoreUserSession;
+
+-(void)logout;
 
 @end

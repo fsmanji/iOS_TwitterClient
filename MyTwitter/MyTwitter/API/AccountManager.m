@@ -39,6 +39,14 @@
     // Should never be called, but just here for clarity really.
 }
 
+-(void)logout {
+    _activeAccount = nil;
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:kEventUserLogout
+     object:self];
+}
+
 -(void)restoreUserSession {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString * accessToken = [defaults stringForKey:kTwitterOauthAccessTokenKey];
@@ -55,6 +63,8 @@
         [_activeAccount.api verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
             
             NSLog(@"Verified: @%@ (%@)", username, userID);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kEventUserLogin object:self];
             
         } errorBlock:^(NSError *error) {
             NSLog(@"Verification failed: %@", error);
