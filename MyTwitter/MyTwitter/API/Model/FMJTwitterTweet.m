@@ -33,7 +33,7 @@
 }
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"text=%@\n\tcreated=%@", _text, _createTime];
+    return [NSString stringWithFormat:@"text=%@\n\tcreated=%@\n\tuser=%@", _text, _createTime, _user];
 }
 
 @end

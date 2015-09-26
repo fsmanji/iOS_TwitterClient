@@ -10,6 +10,9 @@
 #import "Account.h"
 #import "AccountManager.h"
 #import <STTWitter.h>
+#import "FMJTweetCell.h"
+#import "FMJTwitterTweet.h"
+#import "FMJTimeLine.h"
 
 @interface HomeViewController ()
 
@@ -47,9 +50,12 @@
         //_activeAccount = [Account initWithiOSAccountFromView:self.view];
     }
 
+    _activeAccount.timeline.delegate = self;
+    
+    [self setupTableView];
 }
 
-- (void)configureTableView {
+- (void)setupTableView {
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
@@ -62,8 +68,8 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     //
-    UINib *nib = [UINib nibWithNibName:@"BusinessTableViewCell" bundle:nil];
-    [[self tableView] registerNib:nib forCellReuseIdentifier:@"BusinessTableViewCell"];
+    UINib *nib = [UINib nibWithNibName:[FMJTweetCell description] bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:[FMJTweetCell description]];
     
 }
 
@@ -148,14 +154,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _activeAccount.timeline.homeTimeLine.count;
 }
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *simpleTableIdentifier = @"BusinessTableViewCell";
+    NSString *simpleTableIdentifier = [FMJTweetCell description];
     
-    BusinessTableViewCell *cell = (BusinessTableViewCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    FMJTweetCell *cell = (FMJTweetCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (cell == nil)
     {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"BusinessTableViewCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:simpleTableIdentifier owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     
@@ -164,17 +170,14 @@
     return cell;
 }
 
-- (void)configureCell:(BusinessTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+
+- (void)configureCell:(FMJTweetCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSInteger row = indexPath.row;
-    Business * business = _searchResult[row];
-    cell.nameLabel.text = business.name;
-    cell.reviewsLabel.text = business.reviews;
-    cell.addrLabel.text = business.address;
-    cell.categoryLabel.text = [[business.categories valueForKey:@"description"] componentsJoinedByString:@","];
-    [cell.avatarView setImageWithURL:[NSURL URLWithString:business.photoUrl]];
-    [cell.ratingImageView setImageWithURL:[NSURL URLWithString:business.ratingImgUrl]];
+    NSArray* timeline = _activeAccount.timeline.homeTimeLine;
+    FMJTwitterTweet* tweet = timeline[row];
+    [cell initWithTweet:tweet];
 }
-*/
+
 
 #pragma tableview delegate
 
