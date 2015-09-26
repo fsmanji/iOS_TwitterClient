@@ -9,6 +9,7 @@
 #import "FMJTweetCell.h"
 #import "FMJTwitterTweet.h"
 #import "UIImageView+AFNetworking.h"
+#import <NSDate+DateTools.h>
 
 @interface FMJTweetCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
@@ -28,15 +29,16 @@
 
 -(void)initWithTweet:(FMJTwitterTweet*)tweet {
     _tweetID = tweet.tweetID;
-    
+    [_userImage setImageWithURL:[NSURL URLWithString:tweet.user.profileImgUrl]];
     [self setupProfileImage];
     
     _userName.text= tweet.user.username;
     _text.text = tweet.text;
     _screenName.text = tweet.user.screenName;
-    _timeLabel.text = tweet.createTime;
-    [_userImage setImageWithURL:[NSURL URLWithString:tweet.user.profileImgUrl]];
     
+    NSDate *timeAgoDate = [NSDate dateWithString:tweet.createTime formatString:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
+
+    _timeLabel.text = [timeAgoDate shortTimeAgoSinceNow];
 }
 - (IBAction)onTapFavorite:(id)sender {
     [_delegate onFav:_tweetID];

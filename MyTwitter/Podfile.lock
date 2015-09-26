@@ -23,18 +23,21 @@ PODS:
   - BDBOAuth1Manager (1.5.0):
     - AFNetworking/NSURLConnection (~> 2.5.0)
     - AFNetworking/NSURLSession (~> 2.5.0)
+  - DateTools (1.7.0)
   - MBProgressHUD (0.9.1)
   - STTwitter (0.2.2)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
+  - DateTools
   - MBProgressHUD
   - STTwitter
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   BDBOAuth1Manager: 2e28773b58f880fb36b5cd3efcf0b1fefbc78a99
+  DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   STTwitter: eb85d8770ddb0f8989f341cf41ea875e90ac6e7f
 
