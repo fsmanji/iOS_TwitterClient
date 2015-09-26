@@ -29,4 +29,13 @@
     [_webView loadRequest:request];
 }
 
+
+
+#pragma Mark - Account3LeggedOAuthDelegate
+- (void)on3LeggedOAuthCallback {
+    // in case the user has just authenticated through WebViewVC
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 @end

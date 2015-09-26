@@ -11,15 +11,15 @@
 
 @protocol FMJTweetCellDelegate <NSObject>
 
--(void)onReply:(NSString *)tweetID;
--(void)onRetweet:(NSString *)tweetID;
--(void)onFav:(NSString *)tweetID;
+-(void)onReply:(FMJTwitterTweet *)tweet;
+-(void)onRetweet:(FMJTwitterTweet *)tweet;
+-(void)onFav:(FMJTwitterTweet *)tweet;
 
 @end
 
 @interface FMJTweetCell : UITableViewCell
 
-@property NSString *tweetID;
+@property FMJTwitterTweet *tweet;
 @property id<FMJTweetCellDelegate> delegate;
 
 -(void)initWithTweet:(FMJTwitterTweet*)tweet;

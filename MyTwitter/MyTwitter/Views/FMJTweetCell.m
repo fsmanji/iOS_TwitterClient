@@ -28,7 +28,7 @@
 @implementation FMJTweetCell
 
 -(void)initWithTweet:(FMJTwitterTweet*)tweet {
-    _tweetID = tweet.tweetID;
+    _tweet = tweet;
     [_userImage setImageWithURL:[NSURL URLWithString:tweet.user.profileImgUrl]];
     [self setupProfileImage];
     
@@ -39,17 +39,26 @@
     NSDate *timeAgoDate = [NSDate dateWithString:tweet.createTime formatString:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
 
     _timeLabel.text = [timeAgoDate shortTimeAgoSinceNow];
+    
+    [self updateIconStates];
 }
 - (IBAction)onTapFavorite:(id)sender {
-    [_delegate onFav:_tweetID];
+    _tweet.faved = !_tweet.faved;
+    
+    [_delegate onFav:_tweet];
+    
+    [self updateIconStates];
 }
 
 - (IBAction)onTapRetweet:(id)sender {
-    [_delegate onRetweet:_tweetID];
+    [_delegate onRetweet:_tweet];
+    _tweet.retweeted = YES;
+    [self updateIconStates];
 }
 
 - (IBAction)onTapReply:(id)sender {
-    [_delegate onReply:_tweetID];
+    [_delegate onReply:_tweet];
+
 }
 
 -(void) setupProfileImage {
@@ -57,6 +66,21 @@
     _userImage.clipsToBounds = YES;
     _userImage.layer.borderColor = [UIColor whiteColor].CGColor;
     _userImage.layer.borderWidth = 2.0f;
+}
+
+-(void) updateIconStates {
+    //fav icon
+    if (_tweet.faved) {
+        [_favButton setImage:[UIImage imageNamed:@"favorite_on.png"] forState:UIControlStateNormal];
+    } else {
+        [_favButton setImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
+    }
+    //retweeted icon
+    if (_tweet.retweeted) {
+        [_retweetButton setImage:[UIImage imageNamed:@"retweet_on.png"] forState:UIControlStateNormal];
+    } else {
+        [_retweetButton setImage:[UIImage imageNamed:@"retweet.png"] forState:UIControlStateNormal];
+    }
 }
 
 @end

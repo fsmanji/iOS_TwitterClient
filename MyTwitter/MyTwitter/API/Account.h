@@ -13,7 +13,19 @@
 @class UIView;
 @class HomeViewController;
 @class FMJTimeLine;
+@class FMJTwitterTweet;
 
+typedef NS_ENUM(NSUInteger, FMJTweetAction) {
+    kReply,
+    kRetweet,
+    kFavorite
+};
+
+@protocol Account3LeggedOAuthDelegate <NSObject>
+
+-(void)on3LeggedOAuthCallback;
+
+@end
 
 @interface Account : NSObject
 
@@ -21,11 +33,12 @@
 
 @property FMJTimeLine* timeline;
 
+@property id<Account3LeggedOAuthDelegate> delegate;
 
 @property  HomeViewController* parentViewController;
 
 //the same as screen_name: @somebody
-@property NSString *userID;
+@property NSString *username;
 
 
 + (id)initWithUsername:(NSString *)username password:(NSString *)password;
@@ -37,4 +50,9 @@
 -(BOOL) handleOpenURL:(NSURL *)url;
 
 -(void)newTweet:(NSString *)text successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock;
+
+-(void)updateTweet:(FMJTwitterTweet *)tweet withAction:(FMJTweetAction)action successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock;
+
+-(void)logout;
+
 @end

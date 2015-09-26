@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "Account.h"
 
-@interface WebViewController : UIViewController
+@interface WebViewController : UIViewController <Account3LeggedOAuthDelegate>
 
 -(void)sendRequest:(NSURLRequest *)request;
 

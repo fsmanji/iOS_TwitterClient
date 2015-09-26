@@ -62,6 +62,7 @@
                                 <state key="normal" image="reply.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="reply_hover.png"/>
                                 <connections>
                                     <action selector="onTapReply:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NBN-wo-0Sk"/>
                                 </connections>
@@ -182,6 +183,7 @@
     <resources>
         <image name="favorite.png" width="16" height="16"/>
         <image name="reply.png" width="16" height="16"/>
+        <image name="reply_hover.png" width="16" height="16"/>
         <image name="retweet.png" width="19" height="16"/>
     </resources>
 </document>

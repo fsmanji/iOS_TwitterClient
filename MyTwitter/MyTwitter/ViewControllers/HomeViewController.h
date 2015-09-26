@@ -12,6 +12,4 @@
 
 @interface HomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FMJTimeLineDelegate>
 
-- (void)setOAuthToken:(NSString *)token oauthVerifier:(NSString *)verifier;
-
 @end

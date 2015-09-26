@@ -14,6 +14,7 @@
 #import "WebViewController.h"
 #import "HomeViewController.h"
 #import "FMJTimeLine.h"
+#import "FMJTwitterTweet.h"
 
 typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage); // don't bother with NSError for that
 
@@ -67,7 +68,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     return account;
 }
 
-+ (id)initWithWebLoginFromViewControler:(HomeViewController *)viewcontroller {
++ (id)initWithWebLoginFromViewControler:(HomeViewController *)viewcontroller{
     Account * account = [[Account alloc] init];
     account.api = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kConsumerKey
                                                 consumerSecret:kConsumerSecret];
@@ -80,6 +81,9 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
         //[[UIApplication sharedApplication] openURL:url];
         
         WebViewController *webViewVC = [[WebViewController alloc] init];
+        
+        //set call back delegate
+        account.delegate = webViewVC;
         
         [viewcontroller presentViewController:webViewVC animated:YES completion:^{
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -175,6 +179,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kEventUserLogin object:self];
         
+        _username = username;
         NSLog(@"Verified: @%@ (%@)", username, userID);
               
     } errorBlock:^(NSError *error) {
@@ -186,15 +191,42 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 
 
 -(BOOL) handleOpenURL:(NSURL *)url {
-    if ([[url scheme] isEqualToString:@"myapp"] == NO) return NO;
+    if ([[url scheme] isEqualToString:@"myapp"] == NO)
+        return NO;
+    
+    [_delegate on3LeggedOAuthCallback];
     
     NSDictionary *d = [self parametersDictionaryFromQueryString:[url query]];
     
-    NSString *token = d[@"oauth_token"];
     NSString *verifier = d[@"oauth_verifier"];
     
-    
-    [_parentViewController setOAuthToken:token oauthVerifier:verifier];
+    [_api postAccessTokenRequestWithPIN:verifier successBlock:^(NSString *oauthToken, NSString *oauthTokenSecret, NSString *userID, NSString *screenName) {
+        NSLog(@"-- screenName: %@", screenName);
+        /*
+         At this point, the user can use the API and you can read his access tokens with:
+         
+         _twitter.oauthAccessToken;
+         _twitter.oauthAccessTokenSecret;
+         
+         You can store these tokens (in user default, or in keychain) so that the user doesn't need to authenticate again on next launches.
+         
+         Next time, just instanciate STTwitter with the class method:
+         
+         +[STTwitterAPI twitterAPIWithOAuthConsumerKey:consumerSecret:oauthToken:oauthTokenSecret:]
+         
+         Don't forget to call the -[STTwitter verifyCredentialsWithSuccessBlock:errorBlock:] after that.
+         */
+        
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:_api.oauthAccessToken forKey:kTwitterOauthAccessTokenKey];
+        [defaults setObject:_api.oauthAccessTokenSecret forKey:kTwitterOauthAccessTokenSecretKey];
+        [defaults synchronize];
+        NSLog(@"Twitter access tokens saved.");
+        
+    } errorBlock:^(NSError *error) {
+        
+        NSLog(@"-- %@", [error localizedDescription]);
+    }];
     return YES;
 }
 
@@ -217,6 +249,12 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     return md;
 }
 
+-(void)logout {
+    _api = nil;
+    
+    //Shall we remove access_tokens ?
+}
+
 -(void)newTweet:(NSString *)text successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock {
     [_api postStatusUpdate:text
          inReplyToStatusID:nil
@@ -230,6 +268,34 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
               } errorBlock:^(NSError *error) {
                   errorBlock(error);
               }];
+}
+
+-(void)updateTweet:(FMJTwitterTweet *)tweet withAction:(FMJTweetAction)action successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock{
+    switch (action) {
+        case kFavorite:{
+            [_api postFavoriteState:tweet.faved forStatusID:tweet.tweetID successBlock:successblock
+                         errorBlock:errorBlock];
+        }
+            break;
+        case kReply:{
+            [_api postStatusUpdate:@"test reply"
+                 inReplyToStatusID:tweet.tweetID
+                          latitude:nil
+                         longitude:nil
+                           placeID:nil
+                displayCoordinates:nil
+                          trimUser:nil
+                      successBlock:successblock
+                        errorBlock:errorBlock];
+        }
+            break;
+        case kRetweet:{
+            [_api postStatusRetweetWithID:tweet.tweetID successBlock:successblock errorBlock:errorBlock];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 @end
