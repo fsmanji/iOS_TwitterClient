@@ -13,6 +13,7 @@
 #import "FMJTweetCell.h"
 #import "FMJTwitterTweet.h"
 #import "FMJTimeLine.h"
+#import "MBProgressHUD.h"
 
 @interface HomeViewController ()
 
@@ -106,11 +107,14 @@
 
 - (void)onRefresh:(id)sender {
     [_activeAccount.timeline refresh];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 #pragma MARK delegate from timeline
 
 -(void)didUpdateTimeline:(BOOL)hasMore {
+    [self.refreshControl endRefreshing];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [_tableView reloadData];
 }
 

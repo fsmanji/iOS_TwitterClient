@@ -45,13 +45,13 @@
                                   includeEntities:nil
                                      successBlock:^(NSArray *statuses)
      {
-         if (refresh) {
-             //TODO: find a way to save old tweets instead of fetch again in future.
-             [_homeTimeLine removeAllObjects];
-             
-         }
-         
+
         NSLog(@"Loaded count: %lu", statuses.count);
+        if (refresh && statuses.count > 0) {
+            //TODO: find a way to save old tweets instead of fetch again in future.
+            [_homeTimeLine removeAllObjects];
+             
+        }
         
         [statuses enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
             FMJTwitterTweet *tweet = [FMJTwitterTweet initWithJsonString:obj];
