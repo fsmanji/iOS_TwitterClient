@@ -34,7 +34,7 @@
     
     _userName.text= tweet.user.username;
     _text.text = tweet.text;
-    _screenName.text = tweet.user.screenName;
+    _screenName.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
     
     NSDate *timeAgoDate = [NSDate dateWithString:tweet.createTime formatString:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
 
