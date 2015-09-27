@@ -9,7 +9,7 @@
                 <outlet property="avatarView" destination="Ghd-Sz-8Cz" id="Vbe-Au-mVL"/>
                 <outlet property="nameLabel" destination="IJM-yV-Tym" id="dwm-eZ-MzR"/>
                 <outlet property="screenNameLabel" destination="cLr-pp-tXh" id="nUa-ko-mdY"/>
-                <outlet property="textField" destination="WmS-1r-6j0" id="w4W-Q8-PGG"/>
+                <outlet property="textView" destination="Jld-qf-MRX" id="Ijj-Wc-nNa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -43,25 +43,33 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="What's up ?" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WmS-1r-6j0">
-                    <rect key="frame" x="10" y="68" width="582" height="524"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jld-qf-MRX">
+                    <rect key="frame" x="10" y="64" width="580" height="526"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="WmS-1r-6j0" secondAttribute="bottom" constant="8" id="2eH-rV-u9N"/>
                 <constraint firstItem="Ghd-Sz-8Cz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="3eY-ci-lio"/>
-                <constraint firstAttribute="trailing" secondItem="WmS-1r-6j0" secondAttribute="trailing" constant="8" id="8wt-CP-gpV"/>
+                <constraint firstAttribute="bottom" secondItem="Jld-qf-MRX" secondAttribute="bottom" constant="10" id="FCi-JE-bzt"/>
+                <constraint firstItem="Jld-qf-MRX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="GpX-33-HMX"/>
                 <constraint firstItem="cLr-pp-tXh" firstAttribute="top" secondItem="IJM-yV-Tym" secondAttribute="bottom" constant="5" id="IoJ-cc-CZ0"/>
+                <constraint firstItem="Jld-qf-MRX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="OK7-GL-HfH"/>
+                <constraint firstAttribute="trailing" secondItem="Jld-qf-MRX" secondAttribute="trailing" constant="10" id="Q3Y-Xj-PB2"/>
                 <constraint firstItem="IJM-yV-Tym" firstAttribute="leading" secondItem="Ghd-Sz-8Cz" secondAttribute="trailing" constant="5" id="SkE-ei-fh7"/>
+                <constraint firstItem="Jld-qf-MRX" firstAttribute="top" secondItem="Ghd-Sz-8Cz" secondAttribute="bottom" constant="8" id="Uzh-Zz-5QU"/>
                 <constraint firstItem="IJM-yV-Tym" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="e2Q-lz-ojG"/>
                 <constraint firstItem="cLr-pp-tXh" firstAttribute="leading" secondItem="Ghd-Sz-8Cz" secondAttribute="trailing" constant="5" id="ejd-Ko-9Ok"/>
-                <constraint firstItem="WmS-1r-6j0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="hRM-je-cYS"/>
                 <constraint firstItem="Ghd-Sz-8Cz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="otZ-Il-c8I"/>
-                <constraint firstItem="WmS-1r-6j0" firstAttribute="top" secondItem="Ghd-Sz-8Cz" secondAttribute="bottom" constant="12" id="qTO-b1-HuE"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="OK7-GL-HfH"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="360" y="283"/>
         </view>
     </objects>

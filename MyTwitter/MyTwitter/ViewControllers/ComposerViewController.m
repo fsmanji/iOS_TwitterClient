@@ -15,15 +15,18 @@
 #import "UIImageView+FMJTwitter.h"
 #import "UIViewController+FMJTwitter.h"
 
-@interface ComposerViewController ()
+@interface ComposerViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarView;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property UIBarButtonItem* countDownLabel;
 
 @end
 
+#define kMaxTweetLength 140
 
 @implementation ComposerViewController
 
@@ -46,10 +49,14 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel:)];
     
     //3. add right button
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(onDone:)];
+    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(onDone:)];
     if (_replyTo) {
-        self.navigationItem.rightBarButtonItem.title = @"Reply";
+        doneBtn.title = @"Reply";
     }
+    _countDownLabel = [[UIBarButtonItem alloc] initWithTitle:@"140" style:UIBarButtonItemStylePlain target:nil action:nil];
+    _countDownLabel.tintColor = [UIColor grayColor];
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects: doneBtn,_countDownLabel,nil]];
     
     //4. title
     [self setTitle:@"Composer" withColor:white];
@@ -63,6 +70,8 @@
     _screenNameLabel.text = [NSString stringWithFormat:@"@%@", activeUser.screenName];
     
     [_avatarView fmj_AvatarStyle];
+    
+    _textView.delegate = self;
 }
 
 -(void)onCancel:(id)sender {
@@ -71,7 +80,7 @@
 
 -(void)onDone:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    NSString *text = _textField.text;
+    NSString *text = _textView.text;
     if (_replyTo) {
         [[AccountManager sharedInstance].activeAccount.timeline updateTweet:_replyTo withAction:kReply  andObject:text successBlock:^(NSDictionary *response) {
             NSLog(@"reply: %@", response);
@@ -88,6 +97,30 @@
         }];
 
     }
+}
+
+#pragma MARK - UITextViewDelegate
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range   replacementText:(NSString *)text
+{
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    return (newLength > kMaxTweetLength) ? NO : YES;
+}
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+    int charsLeft = kMaxTweetLength - [textView.text length];
+    
+    if(charsLeft == 0) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"No more characters"
+                                                         message:[NSString stringWithFormat:@"You have reached the character limit of %d.",kMaxTweetLength]
+                                                        delegate:nil
+                                               cancelButtonTitle:@"Ok"
+                                               otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    self.countDownLabel.title = [NSString stringWithFormat:@"%d",charsLeft];
 }
 
 @end
