@@ -15,6 +15,7 @@
 #import "FMJTimeLine.h"
 #import "MBProgressHUD.h"
 #import "ComposerViewController.h"
+#import "UIViewController+FMJTwitter.h"
 
 @interface HomeViewController () <FMJTweetCellDelegate>
 
@@ -76,34 +77,21 @@
 }
 
 - (void)styleNavigationBar {
-    
-    self.navigationItem.title = @"Home";
-    
-    //1. color the navigation bar as light blue
+    UIColor *white = [UIColor whiteColor];
     UIColor * const navBarBgColor = [UIColor colorWithRed:89/255.0f green:174/255.0f blue:235/255.0f alpha:1.0f];
     
-    NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
-    //ios 7+
-    if ([[ver objectAtIndex:0] intValue] >= 7) {
-        self.navigationController.navigationBar.barTintColor = navBarBgColor;
-        self.navigationController.navigationBar.translucent = NO;
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    }else{
-        //ios 6 and older
-        self.navigationController.navigationBar.tintColor = navBarBgColor;
-    }
-    
+    //1. color the navigation bar as light blue
+    [self setNavigationBarFontColor:white barBackgroundColor:navBarBgColor];
     
     //2. add left button
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
-    
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
 
     //3. add right button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
     
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-
+    //4. title
+    [self setTitle:@"Home" withColor:white];
+    
 }
 
 - (void)onRefresh:(id)sender {
@@ -120,6 +108,7 @@
 }
 
 #pragma Notification from Account Manager
+
 - (void)onUserLogin:(id) sender {
 
     [_activeAccount.timeline refresh];
@@ -136,11 +125,7 @@
 
 
 - (void)logout:(id) sender {
-    /*FiltersViewController* filtersPage = [[FiltersViewController alloc] init];
-    filtersPage.delegate = self;
-    [self.navigationController pushViewController:filtersPage animated:YES];*/
-    
-    //reload home with null data
+    [[AccountManager sharedInstance] logout];
 }
 
 - (void)newPost:(id) sender {

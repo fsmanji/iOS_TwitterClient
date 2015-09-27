@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C5F3D9F33FE2E24C34EDD05 /* libPods-MyTwitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626D80D6286AFB8329A4BF9A /* libPods-MyTwitter.a */; };
 		B35EA5BB1BB7AE0900371F62 /* UIImageView+FMJTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B35EA5BA1BB7AE0900371F62 /* UIImageView+FMJTwitter.m */; };
+		B35EA5BE1BB7B46000371F62 /* UIViewController+FMJTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B35EA5BD1BB7B46000371F62 /* UIViewController+FMJTwitter.m */; };
 		B362CFDE1BB3B69C00AD9BAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFDD1BB3B69C00AD9BAE /* main.m */; };
 		B362CFE11BB3B69C00AD9BAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFE01BB3B69C00AD9BAE /* AppDelegate.m */; };
 		B362CFE91BB3B69C00AD9BAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B362CFE81BB3B69C00AD9BAE /* Images.xcassets */; };
@@ -50,6 +51,8 @@
 		626D80D6286AFB8329A4BF9A /* libPods-MyTwitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyTwitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35EA5B91BB7AE0900371F62 /* UIImageView+FMJTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FMJTwitter.h"; sourceTree = "<group>"; };
 		B35EA5BA1BB7AE0900371F62 /* UIImageView+FMJTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FMJTwitter.m"; sourceTree = "<group>"; };
+		B35EA5BC1BB7B46000371F62 /* UIViewController+FMJTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FMJTwitter.h"; sourceTree = "<group>"; };
+		B35EA5BD1BB7B46000371F62 /* UIViewController+FMJTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FMJTwitter.m"; sourceTree = "<group>"; };
 		B362CFD81BB3B69C00AD9BAE /* MyTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B362CFDC1BB3B69C00AD9BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B362CFDD1BB3B69C00AD9BAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 			children = (
 				B35EA5B91BB7AE0900371F62 /* UIImageView+FMJTwitter.h */,
 				B35EA5BA1BB7AE0900371F62 /* UIImageView+FMJTwitter.m */,
+				B35EA5BC1BB7B46000371F62 /* UIViewController+FMJTwitter.h */,
+				B35EA5BD1BB7B46000371F62 /* UIViewController+FMJTwitter.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				B36AD8F71BB78E3F00BEF016 /* ComposerViewController.m in Sources */,
 				B36AD8B91BB3BCE200BEF016 /* Account.m in Sources */,
 				B36AD8D71BB6039600BEF016 /* FMJTimeLine.m in Sources */,
+				B35EA5BE1BB7B46000371F62 /* UIViewController+FMJTwitter.m in Sources */,
 				B36AD8DB1BB613AF00BEF016 /* FMJTweetCell.m in Sources */,
 				B362CFDE1BB3B69C00AD9BAE /* main.m in Sources */,
 				B36AD8D41BB5F43800BEF016 /* FMJTwitterTweet.m in Sources */,

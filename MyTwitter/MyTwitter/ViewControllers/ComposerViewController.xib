@@ -43,8 +43,8 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WmS-1r-6j0">
-                    <rect key="frame" x="8" y="64" width="584" height="528"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="What's up ?" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WmS-1r-6j0">
+                    <rect key="frame" x="10" y="68" width="582" height="524"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -58,9 +58,9 @@
                 <constraint firstItem="IJM-yV-Tym" firstAttribute="leading" secondItem="Ghd-Sz-8Cz" secondAttribute="trailing" constant="5" id="SkE-ei-fh7"/>
                 <constraint firstItem="IJM-yV-Tym" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="e2Q-lz-ojG"/>
                 <constraint firstItem="cLr-pp-tXh" firstAttribute="leading" secondItem="Ghd-Sz-8Cz" secondAttribute="trailing" constant="5" id="ejd-Ko-9Ok"/>
-                <constraint firstItem="WmS-1r-6j0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="hRM-je-cYS"/>
+                <constraint firstItem="WmS-1r-6j0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="hRM-je-cYS"/>
                 <constraint firstItem="Ghd-Sz-8Cz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="otZ-Il-c8I"/>
-                <constraint firstItem="WmS-1r-6j0" firstAttribute="top" secondItem="Ghd-Sz-8Cz" secondAttribute="bottom" constant="8" id="qTO-b1-HuE"/>
+                <constraint firstItem="WmS-1r-6j0" firstAttribute="top" secondItem="Ghd-Sz-8Cz" secondAttribute="bottom" constant="12" id="qTO-b1-HuE"/>
             </constraints>
             <point key="canvasLocation" x="360" y="283"/>
         </view>
