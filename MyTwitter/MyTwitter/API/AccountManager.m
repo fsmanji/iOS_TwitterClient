@@ -294,6 +294,10 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     [[NSNotificationCenter defaultCenter] postNotificationName:kEventUserLogout object:self];
 }
 
+-(BOOL)isLoggedIn {
+    return _activeAccount != nil;
+}
+
 -(void)restoreUserSession {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString * accessToken = [defaults stringForKey:kTwitterOauthAccessTokenKey];

@@ -19,7 +19,7 @@
 
 @interface HomeViewController () <FMJTweetCellDelegate>
 
-@property Account *activeAccount;
+@property (weak, nonatomic) Account *activeAccount;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property UIRefreshControl* refreshControl;
@@ -44,16 +44,6 @@
                                                object:nil];
     
     [self styleNavigationBar];
-    
-    [[AccountManager sharedInstance] restoreUserSession];
-    _activeAccount = [AccountManager sharedInstance].activeAccount;
-    
-    if (_activeAccount == nil) {
-        _activeAccount  = [[AccountManager sharedInstance] accountWithWebLoginFromViewControler:self];
-        //_activeAccount = [Account initWithiOSAccountFromView:self.view];
-    }
-
-    _activeAccount.timeline.delegate = self;
     
     [self setupTableView];
 }
@@ -88,7 +78,7 @@
     [self setNavigationBarFontColor:white barBackgroundColor:navBarBgColor];
     
     //2. add left button
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign In" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
 
     //3. add right button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
@@ -99,8 +89,11 @@
 }
 
 - (void)onRefresh:(id)sender {
-    [_activeAccount.timeline refresh];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if ([[AccountManager sharedInstance] isLoggedIn]) {
+        [_activeAccount.timeline refresh];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    } else
+        NSLog(@"Error: no acitve account to use.");
 }
 
 #pragma MARK delegate from timeline
@@ -114,7 +107,7 @@
 #pragma Notification from Account Manager
 
 - (void)onUserLogin:(id) sender {
-
+    _activeAccount = [AccountManager sharedInstance].activeAccount;
     [_activeAccount.timeline refresh];
 }
 
@@ -124,17 +117,40 @@
      [self.navigationController pushViewController:filtersPage animated:YES];*/
     
     //reload home with null data
+    _activeAccount = nil;
+    [_tableView reloadData];
 }
 
-
-
 - (void)logout:(id) sender {
-    [[AccountManager sharedInstance] logout];
+    if (_activeAccount) {
+        [[AccountManager sharedInstance] logout];
+        _activeAccount = nil;
+        
+        self.navigationItem.leftBarButtonItem.title = @"Sign In";
+        
+    } else {
+        
+        [[AccountManager sharedInstance] restoreUserSession];
+        _activeAccount = [AccountManager sharedInstance].activeAccount;
+        
+        if (_activeAccount == nil) {
+            _activeAccount  = [[AccountManager sharedInstance] accountWithWebLoginFromViewControler:self];
+            //_activeAccount = [Account initWithiOSAccountFromView:self.view];
+        }
+        
+        self.navigationItem.leftBarButtonItem.title = @"Sign Out";
+        _activeAccount.timeline.delegate = self;
+    }
+    
 }
 
 - (void)newPost:(id) sender {
-    ComposerViewController *composer = [[ComposerViewController alloc] init];
-    [self.navigationController pushViewController:composer animated:YES];
+    if (_activeAccount) {
+        ComposerViewController *composer = [[ComposerViewController alloc] init];
+        [self.navigationController pushViewController:composer animated:YES];
+    } else
+        NSLog(@"Error: no acitve account to use.");
+
 }
 
 #pragma MARK - FMJTwitterCellDelegate

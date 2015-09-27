@@ -47,4 +47,6 @@
 -(void)restoreUserSession;
 -(void)logout;
 
+-(BOOL)isLoggedIn;
+
 @end

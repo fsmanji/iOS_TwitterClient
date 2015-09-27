@@ -47,6 +47,9 @@
     
     //3. add right button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(onDone:)];
+    if (_replyTo) {
+        self.navigationItem.rightBarButtonItem.title = @"Reply";
+    }
     
     //4. title
     [self setTitle:@"Composer" withColor:white];
