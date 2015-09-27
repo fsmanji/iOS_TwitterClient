@@ -14,6 +14,7 @@
 @property NSString *tweetID;
 @property NSString *text;
 @property NSString *createTime;
+@property NSString *mediaUrl;
 @property NSUInteger retweetCount;
 @property NSUInteger favCount;
 @property BOOL retweeted;

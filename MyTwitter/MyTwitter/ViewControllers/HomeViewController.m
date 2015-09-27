@@ -60,7 +60,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
-    [_tableView setEstimatedRowHeight:96];
+    [_tableView setEstimatedRowHeight:236];
     [_tableView setRowHeight:UITableViewAutomaticDimension];
     
     //add a PTR control
@@ -210,6 +210,16 @@
 
 
 #pragma tableview delegate
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row = indexPath.row;
+    NSArray* timeline = _activeAccount.timeline.homeTimeLine;
+    FMJTwitterTweet* tweet = timeline[row];
+    if (tweet.mediaUrl) {
+        return 300;
+    } else {
+        return 120;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     

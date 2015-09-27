@@ -20,6 +20,11 @@
     tweet.favCount = [json[@"favorite_count"] intValue];
     tweet.faved = [json[@"favorited"] boolValue];
     tweet.retweeted = [json[@"retweeted"] boolValue];
+    NSArray * media = json[@"entities"][@"media"];
+    if (media) {
+        tweet.mediaUrl = media[0][@"media_url"];
+    }
+    
     
     tweet.user = [FMJTwitterUser initWithJsonString:json[@"user"]];
     

@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favButton;
+@property (weak, nonatomic) IBOutlet UIImageView *mediaImageView;
+
 
 
 @end
@@ -30,6 +32,16 @@
 -(void)initWithTweet:(FMJTwitterTweet*)tweet {
     _tweet = tweet;
     [_userImage setImageWithURL:[NSURL URLWithString:tweet.user.profileImgUrl]];
+    if (tweet.mediaUrl) {
+        _mediaImageView.hidden = NO;
+        [_mediaImageView setImageWithURL:[NSURL URLWithString:tweet.mediaUrl]];
+
+    } else {
+        _mediaImageView.image = nil;
+        _mediaImageView.hidden = YES;
+    }
+    
+    
     [self setupProfileImage];
     
     _userName.text= tweet.user.username;
