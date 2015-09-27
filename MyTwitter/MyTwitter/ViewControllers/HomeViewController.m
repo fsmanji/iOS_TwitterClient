@@ -14,6 +14,7 @@
 #import "FMJTwitterTweet.h"
 #import "FMJTimeLine.h"
 #import "MBProgressHUD.h"
+#import "ComposerViewController.h"
 
 @interface HomeViewController () <FMJTweetCellDelegate>
 
@@ -47,7 +48,7 @@
     _activeAccount = [AccountManager sharedInstance].activeAccount;
     
     if (_activeAccount == nil) {
-        _activeAccount = [Account initWithWebLoginFromViewControler:self];
+        _activeAccount  = [[AccountManager sharedInstance] accountWithWebLoginFromViewControler:self];
         //_activeAccount = [Account initWithiOSAccountFromView:self.view];
     }
 
@@ -122,7 +123,6 @@
 - (void)onUserLogin:(id) sender {
 
     [_activeAccount.timeline refresh];
-    
 }
 
 - (void)onUserLogout:(id) sender {
@@ -144,7 +144,8 @@
 }
 
 - (void)newPost:(id) sender {
-    //lauch composer
+    ComposerViewController *composer = [[ComposerViewController alloc] init];
+    [self.navigationController pushViewController:composer animated:YES];
 }
 
 #pragma MARK - FMJTwitterCellDelegate

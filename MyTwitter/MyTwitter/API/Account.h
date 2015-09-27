@@ -10,10 +10,9 @@
 
 
 @class STTwitterAPI;
-@class UIView;
-@class HomeViewController;
 @class FMJTimeLine;
 @class FMJTwitterTweet;
+@class FMJTwitterUser;
 
 typedef NS_ENUM(NSUInteger, FMJTweetAction) {
     kReply,
@@ -21,33 +20,20 @@ typedef NS_ENUM(NSUInteger, FMJTweetAction) {
     kFavorite
 };
 
-@protocol Account3LeggedOAuthDelegate <NSObject>
 
--(void)on3LeggedOAuthCallback;
-
-@end
 
 @interface Account : NSObject
 
 @property STTwitterAPI* api;
 
+@property FMJTwitterUser* user;
+
 @property FMJTimeLine* timeline;
 
-@property id<Account3LeggedOAuthDelegate> delegate;
-
-@property  HomeViewController* parentViewController;
-
 //the same as screen_name: @somebody
-@property NSString *username;
+@property NSString *screenName;
 
-
-+ (id)initWithUsername:(NSString *)username password:(NSString *)password;
-
-+ (id)initWithWebLoginFromViewControler:(HomeViewController *)viewcontroller;
-
-+ (id)initWithiOSAccountFromView:(UIView *)parentview;
-
--(BOOL) handleOpenURL:(NSURL *)url;
+-(void)getUserInfo:(NSString *)userID;
 
 -(void)newTweet:(NSString *)text successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock;
 

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposerViewController">
             <connections>
+                <outlet property="avatarView" destination="Ghd-Sz-8Cz" id="Vbe-Au-mVL"/>
+                <outlet property="nameLabel" destination="IJM-yV-Tym" id="dwm-eZ-MzR"/>
+                <outlet property="screenNameLabel" destination="cLr-pp-tXh" id="nUa-ko-mdY"/>
+                <outlet property="textField" destination="WmS-1r-6j0" id="w4W-Q8-PGG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +17,52 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ghd-Sz-8Cz">
+                    <rect key="frame" x="8" y="8" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="clY-s6-OXE"/>
+                        <constraint firstAttribute="width" constant="48" id="n8t-gn-UfL"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tim Lee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJM-yV-Tym">
+                    <rect key="frame" x="61" y="5" width="45" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="h2R-IB-FqR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@timlee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLr-pp-tXh">
+                    <rect key="frame" x="61" y="30" width="44" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Ds3-3W-f1X"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WmS-1r-6j0">
+                    <rect key="frame" x="8" y="64" width="584" height="528"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="WmS-1r-6j0" secondAttribute="bottom" constant="8" id="2eH-rV-u9N"/>
+                <constraint firstItem="Ghd-Sz-8Cz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="3eY-ci-lio"/>
+                <constraint firstAttribute="trailing" secondItem="WmS-1r-6j0" secondAttribute="trailing" constant="8" id="8wt-CP-gpV"/>
+                <constraint firstItem="cLr-pp-tXh" firstAttribute="top" secondItem="IJM-yV-Tym" secondAttribute="bottom" constant="5" id="IoJ-cc-CZ0"/>
+                <constraint firstItem="IJM-yV-Tym" firstAttribute="leading" secondItem="Ghd-Sz-8Cz" secondAttribute="trailing" constant="5" id="SkE-ei-fh7"/>
+                <constraint firstItem="IJM-yV-Tym" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="e2Q-lz-ojG"/>
+                <constraint firstItem="cLr-pp-tXh" firstAttribute="leading" secondItem="Ghd-Sz-8Cz" secondAttribute="trailing" constant="5" id="ejd-Ko-9Ok"/>
+                <constraint firstItem="WmS-1r-6j0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="hRM-je-cYS"/>
+                <constraint firstItem="Ghd-Sz-8Cz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="otZ-Il-c8I"/>
+                <constraint firstItem="WmS-1r-6j0" firstAttribute="top" secondItem="Ghd-Sz-8Cz" secondAttribute="bottom" constant="8" id="qTO-b1-HuE"/>
+            </constraints>
+            <point key="canvasLocation" x="360" y="283"/>
         </view>
     </objects>
 </document>

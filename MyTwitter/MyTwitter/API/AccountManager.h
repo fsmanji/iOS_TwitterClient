@@ -21,17 +21,29 @@
 
 @class  Account;
 @class NSURL;
+@class UIView;
+@class HomeViewController;
+
+@protocol Account3LeggedOAuthDelegate <NSObject>
+-(void)on3LeggedOAuthCallback;
+@end
+
 
 @interface AccountManager : NSObject
 
 @property Account* activeAccount;
+@property id<Account3LeggedOAuthDelegate> delegate;
+@property  (nonatomic, weak) HomeViewController* parentViewController;
 
 + (AccountManager *) sharedInstance;
 
--(Account *)activeAccount;
+- (Account *)accountWithUsername:(NSString *)username password:(NSString *)password;
+- (Account *)accountWithAccessToken:(NSString *)accessToken tokenSecret:(NSString *)secret;
+- (Account *)accountWithWebLoginFromViewControler:(HomeViewController *)viewcontroller;
+- (Account *)accountWithiOSAccountFromView:(UIView *)parentview;
 
+-(BOOL) handleOpenURL:(NSURL *)url;
 -(void)restoreUserSession;
-
 -(void)logout;
 
 @end

@@ -64,8 +64,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    Account* defaultAccount = [AccountManager sharedInstance].activeAccount;
-    return [defaultAccount handleOpenURL:url];
+    return [[AccountManager sharedInstance] handleOpenURL:url];
 }
 
 

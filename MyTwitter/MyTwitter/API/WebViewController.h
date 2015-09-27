@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "Account.h"
+#include "AccountManager.h"
 
 @interface WebViewController : UIViewController <Account3LeggedOAuthDelegate>
 
