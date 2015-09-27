@@ -24,6 +24,7 @@
 @class UIView;
 @class HomeViewController;
 
+//delegate for the embedded webview controller
 @protocol Account3LeggedOAuthDelegate <NSObject>
 -(void)on3LeggedOAuthCallback;
 @end
@@ -42,7 +43,7 @@
 - (Account *)accountWithWebLoginFromViewControler:(HomeViewController *)viewcontroller;
 - (Account *)accountWithiOSAccountFromView:(UIView *)parentview;
 
--(BOOL) handleOpenURL:(NSURL *)url;
+-(BOOL)handleOpenURL:(NSURL *)url;
 -(void)restoreUserSession;
 -(void)logout;
 

@@ -77,7 +77,7 @@
 -(void)refresh {
     FMJTwitterTweet *first = [_homeTimeLine firstObject];
     _sinceID = first.tweetID;
-    
+    _lastID = nil;
     
     [self loadMore:YES];
 }

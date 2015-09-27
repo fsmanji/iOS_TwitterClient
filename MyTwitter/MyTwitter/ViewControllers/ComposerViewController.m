@@ -11,6 +11,7 @@
 #import "AccountManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "FMJTwitterUser.h"
+#import "UIImageView+FMJTwitter.h"
 
 @interface ComposerViewController ()
 
@@ -66,6 +67,8 @@
     [_avatarView setImageWithURL:[NSURL URLWithString:activeUser.profileImgUrl]];
     _nameLabel.text = activeUser.username;
     _screenNameLabel.text = [NSString stringWithFormat:@"@%@", activeUser.screenName];
+    
+    [_avatarView fmj_AvatarStyle];
 }
 
 -(void)onCancel:(id)sender {

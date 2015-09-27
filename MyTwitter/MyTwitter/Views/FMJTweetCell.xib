@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyh-nm-qq8">
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uyh-nm-qq8">
                         <rect key="frame" x="76" y="18" width="374" height="87"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rx-YJ-fNy">
@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ScreenName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fp-gu-Aua">
-                                <rect key="frame" x="70" y="0.0" width="82" height="20"/>
+                                <rect key="frame" x="70" y="0.0" width="81.5" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="MTh-iE-UAC"/>
                                 </constraints>
@@ -151,7 +151,7 @@
                         </variation>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="QDk-si-Llt">
-                        <rect key="frame" x="76" y="102" width="374" height="126"/>
+                        <rect key="frame" x="78" y="102" width="374" height="126"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uPx-3Q-54Z">
                         <rect key="frame" x="8" y="18" width="60" height="60"/>
@@ -165,12 +165,12 @@
                     <constraint firstAttribute="bottomMargin" secondItem="uyh-nm-qq8" secondAttribute="bottom" id="0Tn-OJ-hXi"/>
                     <constraint firstItem="uPx-3Q-54Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="0y6-Hp-g3g"/>
                     <constraint firstItem="uyh-nm-qq8" firstAttribute="leading" secondItem="uPx-3Q-54Z" secondAttribute="trailing" constant="8" id="4Qc-r4-Sis"/>
-                    <constraint firstItem="QDk-si-Llt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="68" id="WTL-Vr-AaV"/>
+                    <constraint firstItem="QDk-si-Llt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="70" id="WTL-Vr-AaV"/>
                     <constraint firstItem="uPx-3Q-54Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="YKr-tc-fyU"/>
                     <constraint firstItem="uyh-nm-qq8" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="fKr-it-9jS"/>
                     <constraint firstItem="uyh-nm-qq8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="q2X-Go-kne"/>
                     <constraint firstItem="QDk-si-Llt" firstAttribute="top" secondItem="uyh-nm-qq8" secondAttribute="bottom" constant="8" id="q5c-Qm-W0e"/>
-                    <constraint firstItem="QDk-si-Llt" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="sBF-8W-e44"/>
+                    <constraint firstItem="QDk-si-Llt" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="2" id="sBF-8W-e44"/>
                     <constraint firstAttribute="bottomMargin" secondItem="QDk-si-Llt" secondAttribute="bottom" id="vjW-Ps-GkZ"/>
                 </constraints>
                 <variation key="default">

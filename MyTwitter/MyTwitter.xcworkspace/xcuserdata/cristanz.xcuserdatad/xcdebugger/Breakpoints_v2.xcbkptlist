@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyTwitter/Views/FMJTweetCell.m"
-            timestampString = "465008799.181639"
+            timestampString = "465022670.507309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "-initWithTweet:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyTwitter/ViewControllers/ComposerViewController.m"
-            timestampString = "465019751.282293"
+            timestampString = "465022670.507309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "-onCancel:"
             landmarkType = "5">
          </BreakpointContent>

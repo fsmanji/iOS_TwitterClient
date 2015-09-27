@@ -10,6 +10,7 @@
 #import "FMJTwitterTweet.h"
 #import "UIImageView+AFNetworking.h"
 #import <NSDate+DateTools.h>
+#import "UIImageView+FMJTwitter.h"
 
 @interface FMJTweetCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
@@ -74,10 +75,7 @@
 }
 
 -(void) setupProfileImage {
-    _userImage.layer.cornerRadius = 10.0f;
-    _userImage.clipsToBounds = YES;
-    _userImage.layer.borderColor = [UIColor whiteColor].CGColor;
-    _userImage.layer.borderWidth = 2.0f;
+    [_userImage fmj_AvatarStyle];
 }
 
 -(void) updateIconStates {
