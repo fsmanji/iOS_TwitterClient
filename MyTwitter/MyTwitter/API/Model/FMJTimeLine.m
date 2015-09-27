@@ -19,6 +19,7 @@
 
 @property NSString * lastID; //the current oldest tweet id fetched.
 @property NSString * sinceID;
+@property NSMutableArray *tmpArray;
 
 @end
 
@@ -29,6 +30,15 @@
     if (self) {
         _homeTimeLine = [NSMutableArray array];
         _pendingTweets = [NSMutableArray array];
+        _tmpArray = [NSMutableArray array];
+    }
+    return self;
+}
+
+-(id)initWithAccount:(Account *)account {
+    self = [self init];
+    if (self) {
+        _account = account;
     }
     return self;
 }
@@ -45,33 +55,45 @@
                                   includeEntities:nil
                                      successBlock:^(NSArray *statuses)
      {
+         
+         NSLog(@"Loaded count: %lu", statuses.count);
+         
+         _hasMore = kPageSize == statuses.count;
+         
+         [_tmpArray removeAllObjects];
+         
+         [statuses enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+             FMJTwitterTweet *tweet = [FMJTwitterTweet initWithJsonString:obj];
+             NSLog(@"Parsing Tweet: %@", tweet);
+             [_tmpArray addObject:tweet];
+         }];
+         
+         FMJTwitterTweet *lastOne = [_tmpArray lastObject];
+         _lastID = lastOne.tweetID;
+         
+         if (refresh) {
+             if (_hasMore) {
+                 //clear the existing array
+                 [_homeTimeLine removeAllObjects];
 
-        NSLog(@"Loaded count: %lu", statuses.count);
-        if (refresh && statuses.count > 0) {
-            //TODO: find a way to save old tweets instead of fetch again in future.
-            [_homeTimeLine removeAllObjects];
-             
-        }
-        
-        [statuses enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
-            FMJTwitterTweet *tweet = [FMJTwitterTweet initWithJsonString:obj];
-            NSLog(@"Parsing Tweet: %@", tweet);
-            [_homeTimeLine addObject:tweet];
-        }];
-        
-        FMJTwitterTweet *lastOne = [_homeTimeLine lastObject];
-        
-        _lastID = lastOne.tweetID;
-        
-        if (_delegate) {
-            _hasMore = kPageSize == statuses.count;
-            [_delegate didUpdateTimeline:_hasMore];
-        }
-        
-    } errorBlock:^(NSError *error) {
-        NSLog(@"Error getHomeTimeline: %@", [error userInfo]);
-        
-    }];
+                 [_homeTimeLine addObjectsFromArray:_tmpArray];
+             } else {
+                 //insert to the front of current array
+                 NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                        NSMakeRange(0,[_tmpArray count])];
+                 [_homeTimeLine insertObjects:_tmpArray atIndexes:indexes];
+             }
+         } else {
+             //append new array
+             [_homeTimeLine addObjectsFromArray:_tmpArray];
+         }
+         
+         [_delegate didUpdateTimeline:_hasMore];
+         
+     } errorBlock:^(NSError *error) {
+         NSLog(@"Error getHomeTimeline: %@", [error userInfo]);
+         
+     }];
 }
 
 -(void)refresh {
@@ -80,6 +102,70 @@
     _lastID = nil;
     
     [self loadMore:YES];
+}
+
+
+-(void)newTweet:(NSString *)text successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock {
+    [_account.api  postStatusUpdate:text
+         inReplyToStatusID:nil
+                  latitude:nil
+                 longitude:nil
+                   placeID:nil
+        displayCoordinates:nil
+                  trimUser:nil
+              successBlock:^(NSDictionary *status) {
+                  successblock(status);
+                  
+                  [self refresh];
+              } errorBlock:^(NSError *error) {
+                  errorBlock(error);
+              }];
+}
+
+-(void)updateTweet:(FMJTwitterTweet *)tweet withAction:(FMJTweetAction)action  andObject:(id)obj successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock{
+
+    switch (action) {
+        case kFavorite:{
+            [_account.api postFavoriteState:tweet.faved forStatusID:tweet.tweetID  successBlock:^(NSDictionary *status) {
+                successblock(status);
+                //refresh the time line to get the latest results.
+                [self refresh];
+            } errorBlock:^(NSError *error) {
+                errorBlock(error);
+            }];
+        }
+            break;
+        case kReply:{
+            NSString *reply = (NSString *)obj;
+            [_account.api postStatusUpdate:reply
+                 inReplyToStatusID:tweet.tweetID
+                          latitude:nil
+                         longitude:nil
+                           placeID:nil
+                displayCoordinates:nil
+                          trimUser:nil
+                      successBlock:^(NSDictionary *status) {
+                          successblock(status);
+                          //refresh the time line to get the latest results.
+                          [self refresh];
+                      } errorBlock:^(NSError *error) {
+                          errorBlock(error);
+                      }];
+        }
+            break;
+        case kRetweet:{
+            [_account.api postStatusRetweetWithID:tweet.tweetID  successBlock:^(NSDictionary *status) {
+                successblock(status);
+                //refresh the time line to get the latest results.
+                [self refresh];
+            } errorBlock:^(NSError *error) {
+                errorBlock(error);
+            }];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 @end

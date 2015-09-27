@@ -58,6 +58,10 @@
     [self setupTableView];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [_tableView reloadData];
+}
+
 - (void)setupTableView {
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -136,15 +140,14 @@
 #pragma MARK - FMJTwitterCellDelegate
 
 -(void)onReply:(FMJTwitterTweet *)tweet {
-    [_activeAccount updateTweet:tweet withAction:kReply successBlock:^(NSDictionary *response) {
-        NSLog(@"reply: %@", response);
-    } errorBlock:^(NSError *error){
-        NSLog(@"error: %@", [error userInfo]);
-    }];
+    ComposerViewController *composer = [[ComposerViewController alloc] init];
+    composer.replyTo = tweet;
+    
+    [self.navigationController pushViewController:composer animated:YES];
 }
 
 -(void)onRetweet:(FMJTwitterTweet *)tweet {
-    [_activeAccount updateTweet:tweet withAction:kRetweet successBlock:^(NSDictionary *response) {
+    [_activeAccount.timeline updateTweet:tweet withAction:kRetweet andObject:nil successBlock:^(NSDictionary *response) {
         NSLog(@"reply: %@", response);
     } errorBlock:^(NSError *error){
         NSLog(@"error: %@", [error userInfo]);
@@ -152,7 +155,7 @@
 }
 
 -(void)onFav:(FMJTwitterTweet *)tweet {
-    [_activeAccount updateTweet:tweet withAction:kFavorite successBlock:^(NSDictionary *response) {
+    [_activeAccount.timeline updateTweet:tweet withAction:kFavorite  andObject:nil successBlock:^(NSDictionary *response) {
         NSLog(@"reply: %@", response);
     } errorBlock:^(NSError *error){
         NSLog(@"error: %@", [error userInfo]);

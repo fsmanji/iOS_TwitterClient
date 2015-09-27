@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class FMJTwitterTweet;
 
 @interface ComposerViewController : UIViewController
+
+@property FMJTwitterTweet *replyTo;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ComposerViewController.h"
 #import "Account.h"
+#import "FMJTimeLine.h"
 #import "AccountManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "FMJTwitterUser.h"
@@ -33,7 +34,7 @@
 }
 
 - (void)styleNavigationBar {
-
+    
     UIColor *white = [UIColor whiteColor];
     //1. color the navigation bar as light blue
     UIColor * const navBarBgColor = [UIColor colorWithRed:89/255.0f green:174/255.0f blue:235/255.0f alpha:1.0f];
@@ -43,7 +44,7 @@
     
     //2. add left button
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancel:)];
-
+    
     //3. add right button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(onDone:)];
     
@@ -68,12 +69,22 @@
 -(void)onDone:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
     NSString *text = _textField.text;
-    [[AccountManager sharedInstance].activeAccount newTweet:text successBlock:^(NSDictionary * response) {
-        NSLog(@"NewTeet posted: %@", response);
-        
-    } errorBlock:^(NSError *error) {
-        NSLog(@"NewTweet failed: %@", [error userInfo]);
-    }];
+    if (_replyTo) {
+        [[AccountManager sharedInstance].activeAccount.timeline updateTweet:_replyTo withAction:kReply  andObject:text successBlock:^(NSDictionary *response) {
+            NSLog(@"reply: %@", response);
+        } errorBlock:^(NSError *error){
+            NSLog(@"error: %@", [error userInfo]);
+        }];
+
+    } else {
+        [[AccountManager sharedInstance].activeAccount.timeline newTweet:text successBlock:^(NSDictionary * response) {
+            NSLog(@"NewTeet posted: %@", response);
+            
+        } errorBlock:^(NSError *error) {
+            NSLog(@"NewTweet failed: %@", [error userInfo]);
+        }];
+
+    }
 }
 
 @end

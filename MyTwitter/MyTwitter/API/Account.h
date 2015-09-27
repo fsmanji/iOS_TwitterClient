@@ -14,13 +14,6 @@
 @class FMJTwitterTweet;
 @class FMJTwitterUser;
 
-typedef NS_ENUM(NSUInteger, FMJTweetAction) {
-    kReply,
-    kRetweet,
-    kFavorite
-};
-
-
 
 @interface Account : NSObject
 
@@ -34,10 +27,6 @@ typedef NS_ENUM(NSUInteger, FMJTweetAction) {
 @property NSString *screenName;
 
 -(void)getUserInfo:(NSString *)userID;
-
--(void)newTweet:(NSString *)text successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock;
-
--(void)updateTweet:(FMJTwitterTweet *)tweet withAction:(FMJTweetAction)action successBlock:(void (^)(NSDictionary *))successblock errorBlock:(void (^)(NSError *))errorBlock;
 
 -(void)logout;
 
