@@ -1,18 +1,23 @@
 //
-//  FMJTweetCell.m
+//  TweetViewController.m
 //  MyTwitter
 //
-//  Created by Cristan Zhang on 9/25/15.
+//  Created by Cristan Zhang on 9/27/15.
 //  Copyright (c) 2015 FSManJi. All rights reserved.
 //
 
-#import "FMJTweetCell.h"
+#import "TweetViewController.h"
 #import "FMJTwitterTweet.h"
 #import "UIImageView+AFNetworking.h"
 #import <NSDate+DateTools.h>
 #import "UIImageView+FMJTwitter.h"
+#import "Account.h"
+#import "AccountManager.h"
+#import "ComposerViewController.h"
+#import "FMJTimeLine.h"
 
-@interface FMJTweetCell ()
+@interface TweetViewController ()
+
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *screenName;
@@ -22,19 +27,31 @@
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favButton;
+
 @property (weak, nonatomic) IBOutlet UIImageView *mediaImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *favCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
+
+@property Account* activeAccount;
 
 @end
 
-@implementation FMJTweetCell
+@implementation TweetViewController
 
--(void)initWithTweet:(FMJTwitterTweet*)tweet {
-    _tweet = tweet;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    _activeAccount = [AccountManager sharedInstance].activeAccount;
+    [self updateWithTweet:_tweet];
+}
+
+-(void)updateWithTweet:(FMJTwitterTweet*)tweet {
+
     [_userImage setImageWithURL:[NSURL URLWithString:tweet.user.profileImgUrl]];
     if (tweet.mediaUrl) {
         _mediaImageView.hidden = NO;
         [_mediaImageView setImageWithURL:[NSURL URLWithString:tweet.mediaUrl]];
-
+        
     } else {
         _mediaImageView.image = nil;
         _mediaImageView.hidden = YES;
@@ -49,29 +66,40 @@
     
     _screenName.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
     
-    NSDate *timeAgoDate = [NSDate dateWithString:tweet.createTime formatString:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
-
-    _timeLabel.text = [timeAgoDate shortTimeAgoSinceNow];
+    _timeLabel.text = tweet.createTime;
+    _retweetCountLabel.text = [NSString stringWithFormat: @"%ld", tweet.retweetCount];
+    _favCountLabel.text = [NSString stringWithFormat: @"%ld", tweet.favCount];
     
     [self updateIconStates];
 }
+
 - (IBAction)onTapFavorite:(id)sender {
     _tweet.faved = !_tweet.faved;
-    
-    [_delegate onFav:_tweet];
-    
     [self updateIconStates];
+    
+    [_activeAccount.timeline updateTweet:_tweet withAction:kFavorite  andObject:nil successBlock:^(NSDictionary *response) {
+        NSLog(@"reply: %@", response);
+    } errorBlock:^(NSError *error){
+        NSLog(@"error: %@", [error userInfo]);
+    }];
 }
 
 - (IBAction)onTapRetweet:(id)sender {
-    [_delegate onRetweet:_tweet];
+    [_activeAccount.timeline updateTweet:_tweet withAction:kRetweet andObject:nil successBlock:^(NSDictionary *response) {
+        NSLog(@"reply: %@", response);
+    } errorBlock:^(NSError *error){
+        NSLog(@"error: %@", [error userInfo]);
+    }];
+    
     _tweet.retweeted = YES;
     [self updateIconStates];
 }
 
 - (IBAction)onTapReply:(id)sender {
-    [_delegate onReply:_tweet];
-
+    ComposerViewController *composer = [[ComposerViewController alloc] init];
+    composer.replyTo = _tweet;
+    
+    [self.navigationController pushViewController:composer animated:YES];
 }
 
 -(void) setupProfileImage {
@@ -79,18 +107,8 @@
 }
 
 -(void) updateIconStates {
-    //fav icon
-    if (_tweet.faved) {
-        [_favButton setImage:[UIImage imageNamed:@"favorite_on.png"] forState:UIControlStateNormal];
-    } else {
-        [_favButton setImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
-    }
-    //retweeted icon
-    if (_tweet.retweeted) {
-        [_retweetButton setImage:[UIImage imageNamed:@"retweet_on.png"] forState:UIControlStateNormal];
-    } else {
-        [_retweetButton setImage:[UIImage imageNamed:@"retweet.png"] forState:UIControlStateNormal];
-    }
+    _retweetButton.selected = _tweet.retweeted;
+    _favButton.selected = _tweet.faved;
 }
 
 @end

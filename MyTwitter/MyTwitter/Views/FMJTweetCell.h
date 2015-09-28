@@ -19,7 +19,7 @@
 
 @interface FMJTweetCell : UITableViewCell
 
-@property FMJTwitterTweet *tweet;
+@property (nonatomic, readonly)FMJTwitterTweet *tweet;
 @property id<FMJTweetCellDelegate> delegate;
 
 -(void)initWithTweet:(FMJTwitterTweet*)tweet;

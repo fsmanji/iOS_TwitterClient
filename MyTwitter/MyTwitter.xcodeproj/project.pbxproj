@@ -10,6 +10,8 @@
 		7C5F3D9F33FE2E24C34EDD05 /* libPods-MyTwitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626D80D6286AFB8329A4BF9A /* libPods-MyTwitter.a */; };
 		B35EA5BB1BB7AE0900371F62 /* UIImageView+FMJTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B35EA5BA1BB7AE0900371F62 /* UIImageView+FMJTwitter.m */; };
 		B35EA5BE1BB7B46000371F62 /* UIViewController+FMJTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = B35EA5BD1BB7B46000371F62 /* UIViewController+FMJTwitter.m */; };
+		B35EA5C21BB8B3A100371F62 /* TweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B35EA5C01BB8B3A100371F62 /* TweetViewController.m */; };
+		B35EA5C31BB8B3A100371F62 /* TweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35EA5C11BB8B3A100371F62 /* TweetViewController.xib */; };
 		B362CFDE1BB3B69C00AD9BAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFDD1BB3B69C00AD9BAE /* main.m */; };
 		B362CFE11BB3B69C00AD9BAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B362CFE01BB3B69C00AD9BAE /* AppDelegate.m */; };
 		B362CFE91BB3B69C00AD9BAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B362CFE81BB3B69C00AD9BAE /* Images.xcassets */; };
@@ -53,6 +55,9 @@
 		B35EA5BA1BB7AE0900371F62 /* UIImageView+FMJTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FMJTwitter.m"; sourceTree = "<group>"; };
 		B35EA5BC1BB7B46000371F62 /* UIViewController+FMJTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FMJTwitter.h"; sourceTree = "<group>"; };
 		B35EA5BD1BB7B46000371F62 /* UIViewController+FMJTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FMJTwitter.m"; sourceTree = "<group>"; };
+		B35EA5BF1BB8B3A100371F62 /* TweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetViewController.h; sourceTree = "<group>"; };
+		B35EA5C01BB8B3A100371F62 /* TweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetViewController.m; sourceTree = "<group>"; };
+		B35EA5C11BB8B3A100371F62 /* TweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetViewController.xib; sourceTree = "<group>"; };
 		B362CFD81BB3B69C00AD9BAE /* MyTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B362CFDC1BB3B69C00AD9BAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B362CFDD1BB3B69C00AD9BAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -197,6 +202,9 @@
 				B36AD8F41BB78E3F00BEF016 /* ComposerViewController.h */,
 				B36AD8F51BB78E3F00BEF016 /* ComposerViewController.m */,
 				B36AD8F61BB78E3F00BEF016 /* ComposerViewController.xib */,
+				B35EA5BF1BB8B3A100371F62 /* TweetViewController.h */,
+				B35EA5C01BB8B3A100371F62 /* TweetViewController.m */,
+				B35EA5C11BB8B3A100371F62 /* TweetViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -369,6 +377,7 @@
 				B36AD8E91BB63EF400BEF016 /* favorite.png in Resources */,
 				B36AD8EF1BB63EF400BEF016 /* retweet_hover.png in Resources */,
 				B36AD8EA1BB63EF400BEF016 /* favorite_hover.png in Resources */,
+				B35EA5C31BB8B3A100371F62 /* TweetViewController.xib in Resources */,
 				B36AD8EE1BB63EF400BEF016 /* retweet.png in Resources */,
 				B362CFE91BB3B69C00AD9BAE /* Images.xcassets in Resources */,
 				B362D00E1BB3B7A900AD9BAE /* HomeViewController.xib in Resources */,
@@ -424,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B35EA5C21BB8B3A100371F62 /* TweetViewController.m in Sources */,
 				B362CFE11BB3B69C00AD9BAE /* AppDelegate.m in Sources */,
 				B36AD8C91BB4C74300BEF016 /* WebViewController.m in Sources */,
 				B35EA5BB1BB7AE0900371F62 /* UIImageView+FMJTwitter.m in Sources */,

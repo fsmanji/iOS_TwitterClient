@@ -68,9 +68,8 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 }
 
 - (Account *)accountWithUsername:(NSString *)username password:(NSString *)password {
+    NSLog(@"accountWithUsername");
     Account * account = [[Account alloc] init];
-    
-    
     account.api = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kConsumerKey
                                                 consumerSecret:kConsumerSecret
                                                       username:username
@@ -80,6 +79,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 }
 
 - (Account *)accountWithAccessToken:(NSString *)accessToken tokenSecret:(NSString *)accessTokenSecret {
+    NSLog(@"accountWithAccessToken");
     Account * account = [[Account alloc] init];
     account.api = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kConsumerKey
                                                 consumerSecret:kConsumerSecret
@@ -104,6 +104,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 }
 
 - (Account *)accountWithWebLoginFromViewControler:(HomeViewController *)viewcontroller{
+    NSLog(@"accountWithWebLoginFromViewControler");
     Account * account = [[Account alloc] init];
     account.api = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kConsumerKey
                                                 consumerSecret:kConsumerSecret];
@@ -136,7 +137,8 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     return account;
 }
 
-- (Account *)accountWithiOSAccountFromView:(UIView *)parentview{
+- (Account *)accountWithiOSAccountFromView:(UIView *)parentview {
+    NSLog(@"accountWithiOSAccountFromView");
     Account * account = [[Account alloc] init];
     [self chooseAccount:parentview];
     

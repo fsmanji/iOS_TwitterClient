@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import "ComposerViewController.h"
 #import "UIViewController+FMJTwitter.h"
+#import "TweetViewController.h"
 
 @interface HomeViewController () <FMJTweetCellDelegate>
 
@@ -226,8 +227,11 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TweetViewController *vc = [[TweetViewController alloc] init];
+    vc.tweet = _activeAccount.timeline.homeTimeLine[indexPath.row];;
     
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void) dealloc
