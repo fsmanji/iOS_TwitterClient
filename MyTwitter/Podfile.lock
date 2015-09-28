@@ -26,6 +26,7 @@ PODS:
   - DateTools (1.7.0)
   - MBProgressHUD (0.9.1)
   - STTwitter (0.2.2)
+  - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - DateTools
   - MBProgressHUD
   - STTwitter
+  - SVPullToRefresh
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -40,5 +42,6 @@ SPEC CHECKSUMS:
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   STTwitter: eb85d8770ddb0f8989f341cf41ea875e90ac6e7f
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
 
 COCOAPODS: 0.38.2

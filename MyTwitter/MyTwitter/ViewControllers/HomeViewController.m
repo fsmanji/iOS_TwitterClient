@@ -17,6 +17,7 @@
 #import "ComposerViewController.h"
 #import "UIViewController+FMJTwitter.h"
 #import "TweetViewController.h"
+#import "SVPullToRefresh.h"
 
 @interface HomeViewController () <FMJTweetCellDelegate>
 
@@ -65,7 +66,15 @@
     [self.refreshControl addTarget:self action:@selector(onRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
-    //
+    //add inifite scroll spinner
+    [_tableView addInfiniteScrollingWithActionHandler:^{
+        // append data to data source, insert new cells at the end of table view
+        // call [tableView.infiniteScrollingView stopAnimating] when done
+        
+        [_activeAccount.timeline loadMore:NO];
+    }];
+    
+    //register cell xib
     UINib *nib = [UINib nibWithNibName:[FMJTweetCell description] bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:[FMJTweetCell description]];
     
@@ -102,6 +111,8 @@
 -(void)didUpdateTimeline:(BOOL)hasMore {
     [self.refreshControl endRefreshing];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [_tableView.infiniteScrollingView stopAnimating];
+    
     [_tableView reloadData];
 }
 

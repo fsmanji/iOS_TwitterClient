@@ -15,7 +15,18 @@ typedef NS_ENUM(NSUInteger, FMJTweetAction) {
 };
 
 @protocol FMJTimeLineDelegate <NSObject>
+
+@optional
 -(void)didUpdateTimeline:(BOOL)hasMore;
+
+//use below to show the loading spinner
+-(void)willLoadMoreTimeline;
+
+//action feedback
+-(void)didFavorite:(NSString *)statusID;
+-(void)didRetweet:(NSString *)statusID;
+-(void)didReply:(NSString *)replyToID;
+
 @end
 
 @class Account;

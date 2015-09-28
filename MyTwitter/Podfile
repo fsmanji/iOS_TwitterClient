@@ -8,6 +8,8 @@ pod 'BDBOAuth1Manager'
 pod 'MBProgressHUD'
 pod 'STTwitter'
 pod 'DateTools'
+#pull to refresh and infinite scroll widget
+pod 'SVPullToRefresh'
 
 end
 

@@ -26,4 +26,6 @@
 
 +(FMJTwitterTweet *)newTweetWithText:(NSString *)text;
 
+-(void)toggleFav;
+-(void)toggleRetweet;
 @end

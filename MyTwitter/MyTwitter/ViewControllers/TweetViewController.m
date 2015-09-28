@@ -75,6 +75,7 @@
 
 - (IBAction)onTapFavorite:(id)sender {
     _tweet.faved = !_tweet.faved;
+    
     [self updateIconStates];
     
     [_activeAccount.timeline updateTweet:_tweet withAction:kFavorite  andObject:nil successBlock:^(NSDictionary *response) {
