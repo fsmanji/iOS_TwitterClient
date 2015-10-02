@@ -1,13 +1,22 @@
+
 //
-//  UIView+UpdateAutoLayoutConstraints.h
-//  MyTwitter
+//  UIView+UpdateAutoLayoutConstant.h
+//  ConstraintsCodeDemo
 //
-//  Created by Cristan Zhang on 10/1/15.
-//  Copyright (c) 2015 FSManJi. All rights reserved.
+//  Created by Damien Romito on 13/03/2014.
+//  Copyright (c) 2014 Damien Romito. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface UIView (UpdateAutoLayoutConstraints)
-
+- (BOOL) setConstraintConstant:(CGFloat)constant forAttribute:(NSLayoutAttribute)attribute;
+- (CGFloat) constraintConstantforAttribute:(NSLayoutAttribute)attribute;
+- (NSLayoutConstraint*) constraintForAttribute:(NSLayoutAttribute)attribute;
+- (void)hideView:(BOOL)hidden byAttribute:(NSLayoutAttribute)attribute;
+- (void)hideByHeight:(BOOL)hidden;
+- (void)hideByWidth:(BOOL)hidden;
+- (CGSize) getSize;
+- (void)sizeToSubviews;
+- (void)updateSizes;
 @end

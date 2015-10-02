@@ -190,6 +190,17 @@
     }];
 }
 
+-(void)onUpdateCell:(UITableViewCell *)cell {
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    if (!indexPath) {
+        return;
+    }
+    NSArray * indexPaths = @[indexPath];
+    [_tableView beginUpdates];
+    [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    [_tableView endUpdates];
+}
+
 #pragma Tableview datasource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

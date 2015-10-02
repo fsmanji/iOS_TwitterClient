@@ -37,6 +37,7 @@
 		B36AD8F01BB63EF400BEF016 /* retweet_on.png in Resources */ = {isa = PBXBuildFile; fileRef = B36AD8E51BB63EF400BEF016 /* retweet_on.png */; };
 		B36AD8F71BB78E3F00BEF016 /* ComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B36AD8F51BB78E3F00BEF016 /* ComposerViewController.m */; };
 		B36AD8F81BB78E3F00BEF016 /* ComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B36AD8F61BB78E3F00BEF016 /* ComposerViewController.xib */; };
+		B3FB76421BBDFA3600C74BD0 /* UIView+UpdateAutoLayoutConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FB76411BBDFA3600C74BD0 /* UIView+UpdateAutoLayoutConstraints.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		B36AD8F41BB78E3F00BEF016 /* ComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposerViewController.h; sourceTree = "<group>"; };
 		B36AD8F51BB78E3F00BEF016 /* ComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposerViewController.m; sourceTree = "<group>"; };
 		B36AD8F61BB78E3F00BEF016 /* ComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposerViewController.xib; sourceTree = "<group>"; };
+		B3FB76401BBDFA3600C74BD0 /* UIView+UpdateAutoLayoutConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UpdateAutoLayoutConstraints.h"; sourceTree = "<group>"; };
+		B3FB76411BBDFA3600C74BD0 /* UIView+UpdateAutoLayoutConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UpdateAutoLayoutConstraints.m"; sourceTree = "<group>"; };
 		C0F33ED88A8054534530E8E9 /* Pods-MyTwitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTwitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTwitter/Pods-MyTwitter.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DD3A20DEF9B030B46F4F4B /* Pods-MyTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTwitter/Pods-MyTwitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +130,8 @@
 				B35EA5BA1BB7AE0900371F62 /* UIImageView+FMJTwitter.m */,
 				B35EA5BC1BB7B46000371F62 /* UIViewController+FMJTwitter.h */,
 				B35EA5BD1BB7B46000371F62 /* UIViewController+FMJTwitter.m */,
+				B3FB76401BBDFA3600C74BD0 /* UIView+UpdateAutoLayoutConstraints.h */,
+				B3FB76411BBDFA3600C74BD0 /* UIView+UpdateAutoLayoutConstraints.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				B36AD8DB1BB613AF00BEF016 /* FMJTweetCell.m in Sources */,
 				B362CFDE1BB3B69C00AD9BAE /* main.m in Sources */,
 				B36AD8D41BB5F43800BEF016 /* FMJTwitterTweet.m in Sources */,
+				B3FB76421BBDFA3600C74BD0 /* UIView+UpdateAutoLayoutConstraints.m in Sources */,
 				B362D00D1BB3B7A900AD9BAE /* HomeViewController.m in Sources */,
 				B36AD8CE1BB5B43400BEF016 /* AccountManager.m in Sources */,
 			);

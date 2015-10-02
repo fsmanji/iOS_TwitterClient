@@ -15,6 +15,8 @@
 -(void)onRetweet:(FMJTwitterTweet *)tweet;
 -(void)onFav:(FMJTwitterTweet *)tweet;
 
+-(void)onUpdateCell:(UITableViewCell *)sender;
+
 @end
 
 @interface FMJTweetCell : UITableViewCell

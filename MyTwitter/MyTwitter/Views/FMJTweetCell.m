@@ -11,6 +11,8 @@
 #import "UIImageView+AFNetworking.h"
 #import <NSDate+DateTools.h>
 #import "UIImageView+FMJTwitter.h"
+#import <AFNetworking.h>
+#import "UIView+UpdateAutoLayoutConstraints.h"
 
 @interface FMJTweetCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
@@ -29,32 +31,61 @@
 @implementation FMJTweetCell
 
 -(void)initWithTweet:(FMJTwitterTweet*)tweet {
-    _tweet = tweet;
-    [_userImage setImageWithURL:[NSURL URLWithString:tweet.user.profileImgUrl]];
-    if (tweet.mediaUrl) {
-        _mediaImageView.hidden = NO;
-        [_mediaImageView setImageWithURL:[NSURL URLWithString:tweet.mediaUrl]];
-
-    } else {
-        _mediaImageView.image = nil;
-        _mediaImageView.hidden = YES;
+    if(_tweet != tweet) {
+        _tweet = tweet;
+        [_userImage setImageWithURL:[NSURL URLWithString:tweet.user.profileImgUrl]];
+        if (tweet.mediaUrl) {
+            [_mediaImageView hideByHeight:NO];
+            [_mediaImageView setImageWithURL:[NSURL URLWithString:tweet.mediaUrl]];
+            //[self downloadPhoto:tweet.mediaUrl];
+            
+        } else {
+            _mediaImageView.image = nil;
+            [_mediaImageView hideByHeight:YES];
+        }
+        
+        
+        [self setupProfileImage];
+        
+        _userName.text= tweet.user.username;
+        _text.text = tweet.text;
+        [_text sizeToFit];
+        
+        _screenName.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
+        
+        NSDate *timeAgoDate = [NSDate dateWithString:tweet.createTime formatString:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
+        
+        _timeLabel.text = [timeAgoDate shortTimeAgoSinceNow];
+        
+        [self updateIconStates];
     }
-    
-    
-    [self setupProfileImage];
-    
-    _userName.text= tweet.user.username;
-    _text.text = tweet.text;
-    [_text sizeToFit];
-    
-    _screenName.text = [NSString stringWithFormat:@"@%@", tweet.user.screenName];
-    
-    NSDate *timeAgoDate = [NSDate dateWithString:tweet.createTime formatString:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
-
-    _timeLabel.text = [timeAgoDate shortTimeAgoSinceNow];
-    
-    [self updateIconStates];
 }
+
+//below code failed to update the tableview row.
+//once it's displayed you can only call reloadRows, but it will
+//cause the table view flashing and not good.
+-(void)downloadPhoto:(NSString *)url {
+    
+    NSURL *URL = [NSURL URLWithString:_tweet.mediaUrl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    op.responseSerializer = [AFImageResponseSerializer serializer];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, UIImage* image) {
+        _mediaImageView.image = image;
+        //[_mediaImageView setConstraintConstant:image.size.height forAttribute:NSLayoutAttributeHeight];
+        CGRect frame = _mediaImageView.frame;
+        CGFloat ratio = image.size.height / image.size.width;
+        frame.size.height = frame.size.width * ratio;
+        
+        [_mediaImageView setConstraintConstant:frame.size.height forAttribute:NSLayoutAttributeHeight];
+        [_delegate onUpdateCell:self];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    [[NSOperationQueue mainQueue] addOperation:op];
+}
+
 - (IBAction)onTapFavorite:(id)sender {
     _tweet.faved = !_tweet.faved;
     
@@ -71,7 +102,7 @@
 
 - (IBAction)onTapReply:(id)sender {
     [_delegate onReply:_tweet];
-
+    
 }
 
 -(void) setupProfileImage {
